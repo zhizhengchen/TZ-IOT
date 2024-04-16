@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>业务日志</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<form class="layui-form" action="" style="margin-top: 10px;">
+    <div class="layui-row">
+        <div class="layui-col-md3" style="margin-top: 5px;">
+            <span style="font-size: 18px;margin-left: 30px;">当前页数:</span>
+            <span id="pageCurrent" style="font-weight: bold"></span>
+            <span style="font-size: 18px;margin-left: 20px; color: #FD482C;">最大页数:</span>
+            <span id="pageMax" style="font-weight: bold; color: #FD482C;"></span>
+        </div>
+        <div class="layui-col-md4">
+            <div class="layui-form-item">
+                <label class="layui-form-label" >查询条件</label>
+                <div class="layui-input-block" style="width: 80%;">
+                    <select id="serving" lay-verify="required" lay-filter="selFilter" >
+                        <option value="desc">倒序</option>
+                        <option value="asc">正序</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md2">
+            <div class="plus-minus">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">页数</label>
+                    <div class="layui-input-block">
+                        <input type="number" name="page" id="page" value="1" lay-verify="number"  autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md1" style="margin-left: 5px;">
+            <div class="layui-form-item">
+            <button type="button" lay-filter="queryLogs" id="queryLogs" class="layui-btn" data-type="reload" lay-submit>查询</button>
+            </div>
+        </div>
+
+    </div>
+</form>
+<div class="printerService">
+    <table class="layui-hide" id="logsContainer" lay-filter="test"></table>
+</div>
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script>
+    //加载模块
+    layui.use(function() {
+        //得到各种内置组件
+        var layer = layui.layer //弹层
+            ,
+            form = layui.form,
+            laypage = layui.laypage //分页
+            ,
+            table = layui.table //表格
+            ,
+            element = layui.element //元素操作
+        form.verify({
+            number: function (value) {
+                value=value.trim();
+                var valueNum  = parseInt(value);
+                var pageMaxNum  = parseInt($("#pageMax").text());
+                if (!value) {
+                    $("#page").val(1);
+                    return "空字符串";
+                }else if (valueNum<=0 || valueNum>pageMaxNum){
+                    return "超出页数范围";
+                }
+            }
+        });
+
+        var queryLogs = {
+            reload: function(){
+                var value=$("#page").val().trim();
+                if (!value) {
+                    $("#page").val(1);
+                    return;
+                }
+                var valueNum  = parseInt(value);
+                var pageMaxNum  = parseInt($("#pageMax").text());
+                if (valueNum<=0 || valueNum>pageMaxNum){
+                    return;
+                }
+                var direction= $("#serving").val();
+                var page=$("#page").val();
+                //执行重载
+                table.reload('logsContainer', {
+                    url: '/logs/getLogsLimit' //数据接口
+                    ,where: {
+                        direction:  direction,	//在表格中进行搜索
+                        page:page
+                    },
+                    title: '业务日志表',
+                    toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+                    ,
+                    cols: [
+                        [ //表头
+                            {
+                                field:'number',
+                                title: '序号' ,
+                                align:'center',
+                                type:'numbers',
+                                width: '5%'
+                            }, {
+                            field: 'taskId',
+                            title: '任务Id',
+                            width: '14%'
+                        }, {
+                            field: 'version',
+                            title: '版本号',
+                            width: '4%'
+                        }, {
+                            field: 'taskType',
+                            title: '接口编号',
+                            width: '7%'
+                        },{
+                            field: 'time',
+                            title: '调用时间',
+                            width: '10%'
+                        }, {
+                            field: 'data',
+                            title: '数据',
+                            width: '60%'
+                        }
+                        ]
+                    ],
+                    parseData: function(res) { //res 即为原始返回的数据
+                        $("#pageMax").text(res.pageMax);
+                        $("#pageCurrent").text(res.page);
+                        $("#serving").val(res.direction);
+                        return {
+                            "code": 0, //解析接口状态
+                            "msg": "", //解析提示文本
+                            "data": res.logsList //解析数据列表
+                        };
+                    }
+                });
+            }
+        };
+        $('#queryLogs').on('click', function(){
+            var type = $(this).data('type');
+            queryLogs[type] ? queryLogs[type].call(this) : '';
+        });
+        table.render({
+            elem:'#logsContainer',
+            url: '/logs/getLogsLimit?direction=desc&page=1',
+            title: '业务日志表',
+            cols: [
+                [ //表头
+                    {
+                        field:'number',
+                        title: '序号' ,
+                        align:'center',
+                        type:'numbers',
+                        width: '5%'
+                    }, {
+                    field: 'taskId',
+                    title: '任务Id',
+                    width: '14%'
+                }, {
+                    field: 'version',
+                    title: '版本号',
+                    width: '4%'
+                }, {
+                    field: 'taskType',
+                    title: '接口编号',
+                    width: '7%'
+                },{
+                    field: 'time',
+                    title: '调用时间',
+                    width: '10%'
+                }, {
+                    field: 'data',
+                    title: '数据',
+                    width: '60%'
+                }
+                ]
+            ],
+            parseData: function(res) { //res 即为原始返回的数据
+                $("#pageMax").text(res.pageMax);
+                $("#pageCurrent").text(res.page);
+                $("#serving").val(res.direction);
+                return {
+                    "code": 0, //解析接口状态
+                    "msg": "", //解析提示文本
+                    "data": res.logsList //解析数据列表
+                };
+            }
+        });
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+
+J
+java:S37408"/Provide the parametrized type for this generic.(ÃÀÄÿùÿÿÿÿ
+c
+java:S1192œ"LDefine a constant instead of duplicating this literal "workStation" 4 times.(ñÔ÷ô
+i
+java:S1192¢"MDefine a constant instead of duplicating this literal "progressType" 4 times.(Šµºúÿÿÿÿ
+c
+java:S1192"GDefine a constant instead of duplicating this literal "reqSys" 4 times.(»Û‰Âüÿÿÿÿ
+g
+java:S1192Ÿ"KDefine a constant instead of duplicating this literal "employeeNo" 4 times.(Í”ÖĞøÿÿÿÿ
+c
+java:S1192«"LDefine a constant instead of duplicating this literal "ifCompleted" 4 times.(ÿ³ÔÆ
+g
+java:S1192“"KDefine a constant instead of duplicating this literal "wipOrderNo" 4 times.(·»Ÿúÿÿÿÿ
+j
+java:S1192–"NDefine a constant instead of duplicating this literal "oprSequenceNo" 4 times.(ú–µÆüÿÿÿÿ
+e
+java:S1192g"JDefine a constant instead of duplicating this literal "iOTforPLC" 3 times.(è· Æûÿÿÿÿ
+`
+java:S1192®"JDefine a constant instead of duplicating this literal "productNo" 4 times.(Á2
+n
+java:S1192¨"RDefine a constant instead of duplicating this literal "completedQuantity" 4 times.(«Ã­Ûøÿÿÿÿ
+e
+java:S1192Ÿ"IDefine a constant instead of duplicating this literal "deviceID" 4 times.(Í”ÖĞøÿÿÿÿ
+b
+java:S1192™"KDefine a constant instead of duplicating this literal "workCenter" 4 times.(«ò¤ø
+`
+java:S1192±"IDefine a constant instead of duplicating this literal "serialNo" 4 times.(€Àô†
+_
+java:S1192"IDefine a constant instead of duplicating this literal "facility" 4 times.(Îñ™*
+f	java:S117D"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Šû¾µ
+>
+java:S1604S"(Make this anonymous inner class a lambda(ùóï
+Q	java:S125L"<This block of commented-out lines of code should be removed.(çÈÌÔ
+Q	java:S125Q"<This block of commented-out lines of code should be removed.(ˆò…Â
+G
+java:S1602R",Remove useless curly braces around statement(¶ÇŞÈşÿÿÿÿ
+U
+java:S1854p":Remove this useless assignment to local variable "result".(Æ‹áøÿÿÿÿ
+X
+java:S1854n"=Remove this useless assignment to local variable "kafkaJson".(µÈşúüÿÿÿÿ
+\
+java:S3252X"FUse static access with "com.alibaba.fastjson.JSON" for "toJSONString".(Ó‘áß
+@	java:S106Y"+Replace this use of System.out by a logger.(ŞÇ³€
+V	java:S125Z"<This block of commented-out lines of code should be removed.(­»ÂÀûÿÿÿÿ
+E	java:S106]"+Replace this use of System.out by a logger.(È˜éúÿÿÿÿ
+@	java:S106`"+Replace this use of System.out by a logger.(üĞõè
+?	java:S106b"+Replace this use of System.out by a logger.(•Æë
+I
+java:S1481n".Remove this unused "kafkaJson" local variable.(µÈşúüÿÿÿÿ
+P	java:S125o"<This block of commented-out lines of code should be removed.(«ô~
+F
+java:S1481p"+Remove this unused "result" local variable.(Æ‹áøÿÿÿÿ
+V	java:S125q"<This block of commented-out lines of code should be removed.(“½˜èÿÿÿÿÿ
+Q	java:S125s"<This block of commented-out lines of code should be removed.(„Ä‡™
+V	java:S125w"<This block of commented-out lines of code should be removed.(¹Í–Óıÿÿÿÿ
+@	java:S106}"+Replace this use of System.out by a logger.(êØ‹¿
+n
+java:S3776Œ"RRefactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.(òšÑüøÿÿÿÿ
+Q	java:S125ä"<This block of commented-out lines of code should be removed.(ŠâË%
